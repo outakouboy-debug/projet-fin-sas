@@ -1,6 +1,6 @@
 var prompt = require('prompt-sync')();
 
-var candidats = [{cin : "AB123456",nom : "Boushaba",prenom : "Soufiane",partiPolitique : "Independant",age: 40,electeurs: []}];
+var candidats = [{cin : "AB123456",nom : "Boushaba",prenom : "Soufiane",partiPolitique : "Independant",age: 40,electeurs: [1]}];
 
 function ajouterCandidat(){//1
     let x={}
@@ -27,7 +27,33 @@ function ajouterPlusieursCandidat(){//2
 
 
 function aficherListCandidats(){//3
-//tri a bull also get rid of non elected people     
+//tri a bull also get rid of non elected people 
+    let tab=candidats
+    for(let i=0;i<tab.length;i++){
+        for(let j=0;j<tab.length-1;j++){
+            if(tab[j].electeurs.length<tab[j+1].electeurs.length){
+                let tmp=tab[j];
+                tab[j]=tab[j+1];
+                tab[j+1]=tmp;
+            }
+        }
+    }
+    let k=0
+    while(true){
+        if(!tab[k]||tab[k].electeurs.length==0){
+            console.log("===============================")
+            console.log("la list finis :")
+            console.log("");
+            break
+        }
+        console.log("===============================")
+        console.log("classement : "+(k+1));
+        console.log("CIN : "+tab[k].cin)
+        console.log("nom : "+tab[k].nom)
+        console.log("nombre de votes : "+tab[k].electeurs.length);
+        k++;
+    }
+    return tab;//modification pour statistique func
 
      //no return just printing loop after sorting;
 }
@@ -96,7 +122,7 @@ while(true){
         }
         case 2:{
             candidats=ajouterPlusieursCandidat();
-            console.log(candidats)
+            //console.log(candidats)
             break;
         }
         case 3:{
