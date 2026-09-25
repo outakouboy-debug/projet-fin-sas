@@ -5,12 +5,22 @@ var candidats = [{cin : "AB123456",nom : "Boushaba",prenom : "Soufiane",partiPol
 function ajouterCandidat(){//1
     let x={}
     x.cin=prompt("entrer le cin du candidiat: ");
+    for(let i=0;i<candidats.length;i++){
+        if(candidats[i].cin==cin){
+            console.log("")
+            console.log("ce candidat est deja inscrit ");
+            return ajouterCandidat();
+        }
+    }
+    
     x.nom=prompt("entrer le nom du candidiat: ");
     x.prenom=prompt("entrer le prenom du candidiat: ");
     x.partiPolitique=prompt("entrer la partie politique (Independant ou autre): ");
     x.age=prompt("entrer l'age du candidiat: ")*1;
     x.electeurs=[]
     candidats[candidats.length]=x
+    console.log("")
+    console.log("le candidat inscrit success");
     return candidats;
 }
 
@@ -89,13 +99,42 @@ function voter(cin){//4
 
 function modifierInfo(cin){//5
 //cin has to alr exist
-//small menu verifying if age or political party are changed or maybe both
-//extra: don't forget an extra line before you print
-
-        return candidats
+    for(let i=0;i<candidats.length;i++){
+        if(cin==candidats[i].cin){
+            console.log("")
+            console.log("1.modifie your age :")
+            console.log("2.modifie your political party :")
+            console.log("3.if you want to modifie both :")
+            console.log("")
+            let x =prompt("")*1
+            if(x==1){
+                let age=prompt("entrer le nouveau age : ")*1;
+                candidats[i].age=age;
+                return candidats
+            }else if(x==2){
+                let party=prompt("entrer le nouveau partie political : ");
+                candidats[i].partiPolitique=party;
+                return candidats
+            }else if(x==3){
+                let age=prompt("entrer le nouveau age : ")*1;
+                candidats[i].age=age;
+                console.log("")
+                let party=prompt("entrer le nouveau partie political : ");
+                candidats[i].partiPolitique=party;
+                return candidats
+            }else{
+                console.log("invalid input!")
+                return -1;
+            }
+        }
+    }
+    console.log("")
+    console.log("votre cin est incorrect ou n'a pas inscrit !")
+    return -1
 }
 
 function suprimer(cin){//6
+
 //one loop until i!=j and from j to length///j is index of said object cin is in
 //extra: don't forget an extra line before you print
 
@@ -119,7 +158,6 @@ function stats(){//8
 
 }
 
-//the menu///a while loop always true,a switch to pick choices,treat invalid input cases,make it first to debug the functions
 while(true){
     console.log("=====================================")
     console.log("     hello,how can i help you?")
@@ -163,6 +201,7 @@ while(true){
             let x=modifierInfo(cin);
             if(x!=-1){
                 candidats=x
+                //console.log(candidats);
             }
             break;
         }
