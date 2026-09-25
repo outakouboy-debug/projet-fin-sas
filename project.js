@@ -170,8 +170,17 @@ function suprimer(cin){//6
 
 function rehcercheParNom(nom){//7
     let tab=[]
-    //one loop to fill tab with only objects fitting
-
+    for(let i=0;i<candidats.length;i++){
+        if(candidats[i].nom!=nom){
+            continue
+        }
+        tab.push(candidats[i]);
+    }
+    if(tab.length==0){
+        console.log("")
+        console.log("no resaults !")
+        return;
+    }
     return aficherListCandidats(tab);
 }
 
