@@ -54,17 +54,37 @@ function aficherListCandidats(){//3
         k++;
     }
     return tab;//modification pour statistique func
-
-     //no return just printing loop after sorting;
 }
 
 function voter(cin){//4
-// loop every none independent candidat looking for cin
-
-
-    //return the new list if the vote went through or -1 if it didn't and print the appropriate msg
-    //extra: don't forget an extra line before you print
-    return " Vous avez déjà voté et vous n'avez pas le droit de modifier votre vote ni de voter à nouveau"
+    for(let i=0;i<candidats.length;i++){
+        if(candidats[i].cin==cin){
+            for(let y=0;y<candidats.length;y++){
+                for(let k=0;k<candidats[y].electeurs.length;k++){
+                    if(candidats[y].electeurs[k]==cin){
+                        console.log("");
+                        console.log(" Vous avez déjà voté et vous n'avez pas le droit de modifier votre vote ni de voter à nouveau")
+                        return -1;
+                    }
+                }
+            }
+            let voted=prompt("entrer le cin du candidat vous voulez voter pour : ");
+            for(let j=0;j<candidats.length;j++){
+                if(candidats[j].cin==voted&&candidats[j].partiPolitique!="Independant"){
+                    candidats[j].electeurs.push(cin);
+                    console.log("")
+                    console.log("your vote went throught : ")
+                    return candidats;
+                }
+            }
+            console.log("");
+            console.log("the candidat you are looking for doesn't exist or doesn't have a political party ! ")
+            return -1
+        }
+    }
+    console.log("")
+    console.log("you are not in the list of candidats,enroll first before voting")
+    return -1;  
 }
 
 function modifierInfo(cin){//5
@@ -135,6 +155,7 @@ while(true){
             if(x!=-1){
                 candidats=x;
             }
+            //console.log(candidats)
             break;
         }
         case 5:{
