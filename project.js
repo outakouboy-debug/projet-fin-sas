@@ -1,11 +1,16 @@
 var prompt = require('prompt-sync')();
 
-const candidats = [{cin : "AB123456",nom : "Boushaba",prenom : "Soufiane",partiPolitique : "Indépendant",age: 40,electeurs: []}];
+var candidats = [{cin : "AB123456",nom : "Boushaba",prenom : "Soufiane",partiPolitique : "Independant",age: 40,electeurs: []}];
 
 function ajouterCandidat(){//1
-
-
-
+    let x={}
+    x.cin=prompt("entrer le cin du candidiat: ");
+    x.nom=prompt("entrer le nom du candidiat: ");
+    x.prenom=prompt("entrer le prenom du candidiat: ");
+    x.partiPolitique=prompt("entrer la partie politique (Independant ou autre): ");
+    x.age=prompt("entrer l'age du candidiat: ")*1;
+    x.electeurs=[]
+    candidats[candidats.length]=x
     return candidats;
 }
 
@@ -82,6 +87,7 @@ while(true){
     switch(choix){
         case 1:{
             candidats=ajouterCandidat();
+            //console.log(candidats)
             break;
         }
         case 2:{
