@@ -6,7 +6,7 @@ function ajouterCandidat(){//1
     let x={}
     x.cin=prompt("entrer le cin du candidiat: ");
     for(let i=0;i<candidats.length;i++){
-        if(candidats[i].cin==cin){
+        if(candidats[i].cin==x.cin){
             console.log("")
             console.log("ce candidat est deja inscrit ");
             return ajouterCandidat();
@@ -25,7 +25,6 @@ function ajouterCandidat(){//1
 }
 
 function ajouterPlusieursCandidat(){//2
-// ajouterCandidiat n fois
     let x=prompt("how many candidats do u want to add: ")*1;
     for(let i=0;i<x;i++){
         console.log("===============================")
@@ -36,9 +35,7 @@ function ajouterPlusieursCandidat(){//2
 }
 
 
-function aficherListCandidats(){//3
-//tri a bull also get rid of non elected people 
-    let tab=candidats
+function aficherListCandidats(tab=candidats){//3
     for(let i=0;i<tab.length;i++){
         for(let j=0;j<tab.length-1;j++){
             if(tab[j].electeurs.length<tab[j+1].electeurs.length){
@@ -185,12 +182,41 @@ function rehcercheParNom(nom){//7
 }
 
 function stats(){//8
-    //.lengh
-    //loop adding can.electeurs.length
-    //change aficherListCandidats to return sorted list
-    //make an object with poli parties being key?or a table that on even index has names and uneven has number
-
-
+    console.log("")
+    console.log("the nomber of candidats is : "+candidats.length);
+    console.log("")
+    let tot=0;
+    for(let i=0;i<candidats.length;i++){
+        tot=tot+candidats[i].electeurs.length
+    }
+    console.log("le nombre total de votes est : "+tot);
+    console.log("")
+    let tab=aficherListCandidats();
+    for(let i=0;i<3&&i<tab.length;i++){
+        console.log("======================")
+        console.log("candidat "+(i+1)+" est : "+tab[i].nom)
+        console.log("")
+    }
+    let party=[]
+    for(let j=0;j<candidats.length;j++){
+        let bool =false
+        for(let k=0;k<party.length;k=k+2){
+            if(party[k]==candidats[j].partiPolitique){
+                party[k+1]++;
+                bool=true;
+            }
+            
+        }
+        if(bool==false){
+                    party.push(candidats[j].partiPolitique)
+                    party.push(1);
+        }
+    }
+    for(let m=0;m<party.length;m=m+2){
+        console.log("=====================")
+        console.log("party : "+party[m]);
+        console.log("and with "+party[m+1]+" members! ")
+    }
 }
 
 while(true){
