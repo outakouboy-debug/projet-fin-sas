@@ -134,12 +134,38 @@ function modifierInfo(cin){//5
 }
 
 function suprimer(cin){//6
-
-//one loop until i!=j and from j to length///j is index of said object cin is in
-//extra: don't forget an extra line before you print
-
-
-        return candidats
+     for(let i=0;i<candidats.length;i++){
+        if(cin==candidats[i].cin){
+            for(let k=0;k<candidats.length;k++){
+                for(let l=0;l<candidats[k].electeurs.length;l++){
+                    if(cin==candidats[k].electeurs[l]){
+                        let tab=[];
+                        for(let m=0;m<candidats[k].electeurs.length;m++){
+                            if(candidats[k].electeurs[m]==cin){
+                                continue;
+                            }
+                            tab.push(candidats[k].electeurs[m])
+                        }
+                        candidats[k].electeurs=tab;
+                    }
+                }
+            }
+            var table=[]
+            for(let n=0;n<candidats.length;n++){
+                if(candidats[n].cin==cin){
+                    continue;
+                }
+                table.push(candidats[n]);
+            }
+            candidats=table;
+            console.log("")
+            console.log("deletion was successful !")
+            return candidats;
+        }
+     }
+     console.log("")
+     console.log("the cin you entered is incorrect or doesn't exist !!")
+     return -1;
 }
 
 function rehcercheParNom(nom){//7
@@ -210,6 +236,7 @@ while(true){
             let x=suprimer(cin);
             if(x!=-1){
                 candidats=x
+                //console.log(candidats);
             }
             break;
         }
