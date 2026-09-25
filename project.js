@@ -16,8 +16,12 @@ function ajouterCandidat(){//1
 
 function ajouterPlusieursCandidat(){//2
 // ajouterCandidiat n fois
-
-
+    let x=prompt("how many candidats do u want to add: ")*1;
+    for(let i=0;i<x;i++){
+        console.log("===============================")
+        console.log("entrer l'information du candidat "+(i+1)+" : ");
+        candidats=ajouterCandidat();
+    }
     return candidats
 }
 
@@ -92,6 +96,7 @@ while(true){
         }
         case 2:{
             candidats=ajouterPlusieursCandidat();
+            console.log(candidats)
             break;
         }
         case 3:{
