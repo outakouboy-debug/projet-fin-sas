@@ -5,7 +5,7 @@ var alpha=["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N",
 var num=[1,2,3,4,5,6,7,8,9,0]
 function ajouterCandidat(){//1
     let x={}
-    x.cin=prompt("entrer le cin du candidiat: ");
+    x.cin=prompt("Entrez le CIN du candidat : ");
     let one =true;
     let two=true;
     
@@ -33,67 +33,67 @@ function ajouterCandidat(){//1
     }
     
     if(one||two||are_num){
-        console.log("incorrect cin!")
+        console.log("CIN incorrect !")
         return ajouterCandidat()
     }
     for(let i=0;i<candidats.length;i++){
         if(candidats[i].cin==x.cin){
             console.log("")
-            console.log("ce candidat est deja inscrit ");
+            console.log("Ce candidat est déjà inscrit.");
             return ajouterCandidat();
         }
     }
-    let nom=prompt("entrer le nom du candidiat: ");
+    let nom=prompt("Entrez le nom du candidat : ");
     if(nom!=""){
         x.nom=nom;
     }
     else{
-        console.log("nom est vide !");
+        console.log("Le nom est vide !");
         return ajouterCandidat()
     }
-    let prenom=prompt("entrer le prenom du candidiat: ");
+    let prenom=prompt("Entrez le prénom du candidat : ");
     if(prenom!=""){
         x.prenom=prenom;
     }
     else{
-        console.log("prenom est vide !");
+        console.log("preLe nom est vide !");
         return ajouterCandidat()
     }
-    let parti=prompt("entrer la partie politique (Independant ou autre): ");
+    let parti=prompt("Entrez le parti politique (indépendant ou autre) : ");
     if(parti!=""){
         x.partiPolitique=parti;
     }
     else{
-        console.log("partie poletic est vide !");
+        console.log("Le parti politique est vide !");
         return ajouterCandidat()
     }
-    let age=prompt("entrer l'age du candidiat: ")*1;
+    let age=prompt("Entrez l’âge du candidat : ")*1;
     if(age>=18){
         x.age=age;
     }
     else{
-        console.log(" l'age est inferieur a 18 !");
+        console.log(" L’âge est inférieur à 18 ans !");
         return ajouterCandidat()
     }
     x.electeurs=[]
     candidats[candidats.length]=x
     console.log("")
-    console.log("le candidat inscrit success");
+    console.log("Le candidat a été inscrit avec succès.");
     return candidats;
 }
 
 function ajouterPlusieursCandidat(){//2
-    let howManyTimes=prompt("how many candidats do u want to add: ")*1;
-    if(howManyTimes!=NaN&&howManyTimes>0){
+    let howManyTimes=prompt("Combien de candidats souhaitez-vous ajouter : ")*1;
+    if(howManyTimes!=NaN&&howManyTimes>0&&howManyTimes%1==0){
         for(let i=0;i<howManyTimes;i++){
         console.log("===============================")
-        console.log("entrer l'information du candidat "+(i+1)+" : ");
+        console.log("Entrez les informations du Le candidat "+(i+1)+" : ");
         candidats=ajouterCandidat();
     }
     return candidats
     }
     console.log("");
-    console.log("invalid input(your number is less than one or input type is wrong)!!")
+    console.log("Entrée invalide (le nombre est inférieur à 1 ou le type d’entrée est incorrect) !")
     return ajouterPlusieursCandidat()
 }
 
@@ -101,10 +101,8 @@ function ajouterPlusieursCandidat(){//2
 function aficherListCandidats(tab=candidats){//3
     for(let i=0;i<tab.length;i++){
         for(let j=0;j<tab.length-1;j++){
-            if(tab[j].electeurs.length<tab[j+1].electeurs.length){
-                let tmp=tab[j];
-                tab[j]=tab[j+1];
-                tab[j+1]=tmp;
+            if(tab[j].electeurs.length<tab[j+1].electeurs.length){  
+                [tab[j],tab[j+1]]=[tab[j+1],tab[j]];
             }
         }
     }
@@ -112,15 +110,15 @@ function aficherListCandidats(tab=candidats){//3
     while(true){
         if(!tab[k]||tab[k].electeurs.length==0){
             console.log("===============================")
-            console.log("la list finis :")
+            console.log("La liste est terminée :")
             console.log("");
             break
         }
         console.log("===============================")
-        console.log("classement : "+(k+1));
+        console.log("Classement : "+(k+1));
         console.log("CIN : "+tab[k].cin)
         console.log("nom : "+tab[k].nom)
-        console.log("nombre de votes : "+tab[k].electeurs.length);
+        console.log("Nombre de votes : "+tab[k].electeurs.length);
         k++;
     }
     return tab;//modification pour statistique func
@@ -133,7 +131,7 @@ function voter(cin){//4
                 for(let k=0;k<candidats[y].electeurs.length;k++){
                     if(candidats[y].electeurs[k]==cin){
                         console.log("");
-                        console.log(" Vous avez déjà voté et vous n'avez pas le droit de modifier votre vote ni de voter à nouveau")
+                        console.log(" Vous avez déjà voté et vous n’avez pas le droit de modifier votre vote ni de voter à nouveau")
                         return -1;
                     }
                 }
@@ -143,17 +141,17 @@ function voter(cin){//4
                 if(candidats[j].cin==voted&&candidats[j].partiPolitique!="Independant"){
                     candidats[j].electeurs.push(cin);
                     console.log("")
-                    console.log("your vote went throught : ")
+                    console.log("Votre vote a été enregistré : ")
                     return candidats;
                 }
             }
             console.log("");
-            console.log("the candidat you are looking for doesn't exist or doesn't have a political party ! ")
+            console.log("Le candidat recherché n’existe pas ou n’a pas de parti politique ! ")
             return -1
         }
     }
     console.log("")
-    console.log("you are not in the list of candidats,enroll first before voting")
+    console.log("Vous ne figurez pas sur la liste des candidats. Inscrivez-vous d’abord avant de voter.")
     return -1;  
 }
 
@@ -162,34 +160,34 @@ function modifierInfo(cin){//5
     for(let i=0;i<candidats.length;i++){
         if(cin==candidats[i].cin){
             console.log("")
-            console.log("1.modifie your age :")
-            console.log("2.modifie your political party :")
-            console.log("3.if you want to modifie both :")
+            console.log("1. Modifier votre âge :")
+            console.log("2. Modifier votre parti politique :")
+            console.log("3. Modifier les deux :")
             console.log("")
             let x =prompt("")*1
             if(x==1){
-                let age=prompt("entrer le nouveau age : ")*1;
+                let age=prompt("Entrez le nouvel âge : ")*1;
                 candidats[i].age=age;
                 return candidats
             }else if(x==2){
-                let party=prompt("entrer le nouveau partie political : ");
+                let party=prompt("Entrez le nouveau parti politique : ");
                 candidats[i].partiPolitique=party;
                 return candidats
             }else if(x==3){
-                let age=prompt("entrer le nouveau age : ")*1;
+                let age=prompt("Entrez le nouvel âge : ")*1;
                 candidats[i].age=age;
                 console.log("")
-                let party=prompt("entrer le nouveau partie political : ");
+                let party=prompt("Entrez le nouveau parti politique : ");
                 candidats[i].partiPolitique=party;
                 return candidats
             }else{
-                console.log("invalid input!")
+                console.log("Entrée invalide !")
                 return -1;
             }
         }
     }
     console.log("")
-    console.log("votre cin est incorrect ou n'a pas inscrit !")
+    console.log("Votre CIN est incorrect ou n’est pas inscrit !")
     return -1
 }
 
@@ -219,12 +217,12 @@ function suprimer(cin){//6
             }
             candidats=table;
             console.log("")
-            console.log("deletion was successful !")
+            console.log("Suppression effectuée avec succès !")
             return candidats;
         }
      }
      console.log("")
-     console.log("the cin you entered is incorrect or doesn't exist !!")
+     console.log("Le CIN que vous avez saisi est incorrect ou n’existe pas !")
      return -1;
 }
 
@@ -238,7 +236,7 @@ function rehcercheParNom(nom){//7
     }
     if(tab.length==0){
         console.log("")
-        console.log("no resaults !")
+        console.log("Aucun résultat !")
         return;
     }
     return aficherListCandidats(tab);
@@ -246,7 +244,7 @@ function rehcercheParNom(nom){//7
 
 function stats(){//8
     console.log("")
-    console.log("the nomber of candidats is : "+candidats.length);
+    console.log("Le nombre de candidats est : "+candidats.length);
     console.log("")
     let tot=0;
     for(let i=0;i<candidats.length;i++){
@@ -257,7 +255,7 @@ function stats(){//8
     let tab=aficherListCandidats();
     for(let i=0;i<3&&i<tab.length;i++){
         console.log("======================")
-        console.log("candidat "+(i+1)+" est : "+tab[i].nom)
+        console.log("Le candidat "+(i+1)+" est : "+tab[i].nom)
         console.log("")
     }
     let party=[]
@@ -277,14 +275,14 @@ function stats(){//8
     }
     for(let m=0;m<party.length;m=m+2){
         console.log("=====================")
-        console.log("party : "+party[m]);
-        console.log("and with "+party[m+1]+" members! ")
+        console.log("Parti : "+party[m]);
+        console.log("Avec "+party[m+1]+" membres ! ")
     }
 }
 
 while(true){
     console.log("=====================================")
-    console.log("     hello,how can i help you?")
+    console.log("     Bonjour, comment puis-je vous aider ?")
     console.log("=====================================")
     console.log("1. Ajouter un nouveau candidat :")
     console.log("2. Ajouter plusieurs candidats à la fois:")
@@ -312,7 +310,7 @@ while(true){
             break;
         }
         case 4:{
-            let cin=prompt("entrer votre cin : ")
+            let cin=prompt("Entrez votre CIN : ")
             let x=voter(cin);
             if(x!=-1){
                 candidats=x;
@@ -321,7 +319,7 @@ while(true){
             break;
         }
         case 5:{
-            let cin=prompt("entrer votre cin : ")
+            let cin=prompt("Entrez votre CIN : ")
             let x=modifierInfo(cin);
             if(x!=-1){
                 candidats=x
@@ -330,7 +328,7 @@ while(true){
             break;
         }
         case 6:{
-            let cin=prompt("entrer votre cin : ")
+            let cin=prompt("Entrez votre CIN : ")
             let x=suprimer(cin);
             if(x!=-1){
                 candidats=x
@@ -339,7 +337,7 @@ while(true){
             break;
         }
         case 7:{
-            let nom=prompt("entrer le nom que tu recherche : ");
+            let nom=prompt("Entrez le nom que vous recherchez : ");
             rehcercheParNom(nom);
             break;
         }
@@ -348,7 +346,7 @@ while(true){
             break;
         }
         default :
-        console.log("invalid input,try again :")
+        console.log("Entrée invalide, veuillez réessayer :")
         console.log("");
     }
 
