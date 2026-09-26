@@ -1,10 +1,41 @@
 var prompt = require('prompt-sync')();
 
 var candidats = [{cin : "AB123456",nom : "Boushaba",prenom : "Soufiane",partiPolitique : "Independant",age: 40,electeurs: [1]}];
-
+var alpha=["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+var num=[1,2,3,4,5,6,7,8,9,0]
 function ajouterCandidat(){//1
     let x={}
     x.cin=prompt("entrer le cin du candidiat: ");
+    let one =true;
+    let two=true;
+    
+    if(x.cin.length==6){
+       for(let j=0;j<alpha.length;j++){
+        if(x.cin[0]==alpha[j]){
+            one= false;
+        }
+        if(x.cin[1]==alpha[j]){
+            two= false;
+        }
+        for(let k=2;k<6;k++){
+            let are_num=true;
+            for(let m=0;m<10;m++){
+               if(x.cin[k]==num[m]){
+                are_num==false;
+               }
+            }
+            if(are_num){
+                break;
+            }
+            
+        }
+    } 
+    }
+    
+    if(one||two||are_num){
+        console.log("incorrect cin!")
+        return ajouterCandidat()
+    }
     for(let i=0;i<candidats.length;i++){
         if(candidats[i].cin==x.cin){
             console.log("")
@@ -12,11 +43,38 @@ function ajouterCandidat(){//1
             return ajouterCandidat();
         }
     }
-    
-    x.nom=prompt("entrer le nom du candidiat: ");
-    x.prenom=prompt("entrer le prenom du candidiat: ");
-    x.partiPolitique=prompt("entrer la partie politique (Independant ou autre): ");
-    x.age=prompt("entrer l'age du candidiat: ")*1;
+    let nom=prompt("entrer le nom du candidiat: ");
+    if(nom!=""){
+        x.nom=nom;
+    }
+    else{
+        console.log("nom est vide !");
+        return ajouterCandidat()
+    }
+    let prenom=prompt("entrer le prenom du candidiat: ");
+    if(prenom!=""){
+        x.prenom=prenom;
+    }
+    else{
+        console.log("prenom est vide !");
+        return ajouterCandidat()
+    }
+    let parti=prompt("entrer la partie politique (Independant ou autre): ");
+    if(parti!=""){
+        x.partiPolitique=parti;
+    }
+    else{
+        console.log("partie poletic est vide !");
+        return ajouterCandidat()
+    }
+    let age=prompt("entrer l'age du candidiat: ")*1;
+    if(age>=18){
+        x.age=age;
+    }
+    else{
+        console.log(" l'age est inferieur a 18 !");
+        return ajouterCandidat()
+    }
     x.electeurs=[]
     candidats[candidats.length]=x
     console.log("")
@@ -25,13 +83,18 @@ function ajouterCandidat(){//1
 }
 
 function ajouterPlusieursCandidat(){//2
-    let x=prompt("how many candidats do u want to add: ")*1;
-    for(let i=0;i<x;i++){
+    let howManyTimes=prompt("how many candidats do u want to add: ")*1;
+    if(howManyTimes!=NaN&&howManyTimes>0){
+        for(let i=0;i<howManyTimes;i++){
         console.log("===============================")
         console.log("entrer l'information du candidat "+(i+1)+" : ");
         candidats=ajouterCandidat();
     }
     return candidats
+    }
+    console.log("");
+    console.log("invalid input(your number is less than one or input type is wrong)!!")
+    return ajouterPlusieursCandidat()
 }
 
 
