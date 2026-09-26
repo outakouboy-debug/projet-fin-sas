@@ -1,6 +1,6 @@
 var prompt = require('prompt-sync')();
 
-var candidats = [{cin : "AB123456",nom : "Boushaba",prenom : "Soufiane",partiPolitique : "Independant",age: 40,electeurs: [1]}];
+var candidats = [{cin : "AB123456",nom : "Boushaba",prenom : "Soufiane",partiPolitique : "Independant",age: 40,electeurs: []}];
 var alpha=["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 var num=[1,2,3,4,5,6,7,8,9,0]
 function ajouterCandidat(){//1
@@ -18,10 +18,10 @@ function ajouterCandidat(){//1
             two= false;
         }
         for(let k=2;k<6;k++){
-            let are_num=true;
+            var are_num=true;
             for(let m=0;m<10;m++){
                if(x.cin[k]==num[m]){
-                are_num==false;
+                are_num=false;
                }
             }
             if(are_num){
@@ -67,12 +67,12 @@ function ajouterCandidat(){//1
         console.log("Le parti politique est vide !");
         return ajouterCandidat()
     }
-    let age=prompt("Entrez l’âge du candidat : ")*1;
-    if(age>=18){
+    let age=prompt("Entrez l'âge du candidat : ")*1;
+    if(age>=18&&age<150&&age!=NaN){
         x.age=age;
     }
     else{
-        console.log(" L’âge est inférieur à 18 ans !");
+        console.log(" l'âge doit être compris entre 18 et 150 ans!");
         return ajouterCandidat()
     }
     x.electeurs=[]
@@ -93,7 +93,7 @@ function ajouterPlusieursCandidat(){//2
     return candidats
     }
     console.log("");
-    console.log("Entrée invalide (le nombre est inférieur à 1 ou le type d’entrée est incorrect) !")
+    console.log("Entrée invalide (le nombre est inférieur à 1 ou le type d'entrée est incorrect) !")
     return ajouterPlusieursCandidat()
 }
 
@@ -124,14 +124,45 @@ function aficherListCandidats(tab=candidats){//3
     return tab;//modification pour statistique func
 }
 
-function voter(cin){//4
+function voter(){//4
+    let cin=prompt("Entrez le CIN du candidat : ");
+    let one =true;
+    let two=true;
+    
+    if(cin.length==6){
+       for(let j=0;j<alpha.length;j++){
+        if(cin[0]==alpha[j]){
+            one= false;
+        }
+        if(cin[1]==alpha[j]){
+            two= false;
+        }
+        for(let k=2;k<6;k++){
+            var are_num=true;
+            for(let m=0;m<10;m++){
+               if(cin[k]==num[m]){
+                are_num=false;
+               }
+            }
+            if(are_num){
+                break;
+            }
+            
+        }
+    } 
+    }
+    
+    if(one||two||are_num){
+        console.log("CIN incorrect !")
+        return -1
+    }
     for(let i=0;i<candidats.length;i++){
         if(candidats[i].cin==cin){
             for(let y=0;y<candidats.length;y++){
                 for(let k=0;k<candidats[y].electeurs.length;k++){
                     if(candidats[y].electeurs[k]==cin){
                         console.log("");
-                        console.log(" Vous avez déjà voté et vous n’avez pas le droit de modifier votre vote ni de voter à nouveau")
+                        console.log(" Vous avez déjà voté et vous n'avez pas le droit de modifier votre vote ni de voter à nouveau")
                         return -1;
                     }
                 }
@@ -146,17 +177,48 @@ function voter(cin){//4
                 }
             }
             console.log("");
-            console.log("Le candidat recherché n’existe pas ou n’a pas de parti politique ! ")
+            console.log("Le candidat recherché n'existe pas ou n'a pas de parti politique ! ")
             return -1
         }
     }
     console.log("")
-    console.log("Vous ne figurez pas sur la liste des candidats. Inscrivez-vous d’abord avant de voter.")
+    console.log("Vous ne figurez pas sur la liste des candidats. Inscrivez-vous d'abord avant de voter.")
     return -1;  
 }
 
-function modifierInfo(cin){//5
-//cin has to alr exist
+function modifierInfo(){//5
+    let cin=prompt("Entrez le CIN du candidat : ")
+    let one =true;
+    let two=true;
+    
+    if(cin.length==6){
+       for(let j=0;j<alpha.length;j++){
+        if(cin[0]==alpha[j]){
+            one= false;
+        }
+        if(cin[1]==alpha[j]){
+            two= false;
+        }
+        for(let k=2;k<6;k++){
+            var are_num=true;
+            for(let m=0;m<10;m++){
+               if(cin[k]==num[m]){
+                are_num=false;
+               }
+            }
+            if(are_num){
+                break;
+            }
+            
+        }
+    } 
+    }
+    
+    if(one||two||are_num){
+        console.log("CIN incorrect !")
+        return -1
+    }
+
     for(let i=0;i<candidats.length;i++){
         if(cin==candidats[i].cin){
             console.log("")
@@ -167,17 +229,33 @@ function modifierInfo(cin){//5
             let x =prompt("")*1
             if(x==1){
                 let age=prompt("Entrez le nouvel âge : ")*1;
+                if(age===NaN||age<18||age>150){
+                    console.log("age incorrect !");
+                    return -1
+                }
                 candidats[i].age=age;
                 return candidats
             }else if(x==2){
                 let party=prompt("Entrez le nouveau parti politique : ");
+                if(party==""){
+                    console.log("parti politique est vide  !");
+                    return -1
+                }
                 candidats[i].partiPolitique=party;
                 return candidats
             }else if(x==3){
                 let age=prompt("Entrez le nouvel âge : ")*1;
+                if(age===NaN||age<18||age>150){
+                    console.log("age incorrect !");
+                    return -1
+                }
                 candidats[i].age=age;
                 console.log("")
-                let party=prompt("Entrez le nouveau parti politique : ");
+                 let party=prompt("Entrez le nouveau parti politique : ");
+                if(party==""){
+                    console.log("parti politique est vide  !");
+                    return -1
+                }
                 candidats[i].partiPolitique=party;
                 return candidats
             }else{
@@ -187,7 +265,7 @@ function modifierInfo(cin){//5
         }
     }
     console.log("")
-    console.log("Votre CIN est incorrect ou n’est pas inscrit !")
+    console.log("Votre CIN n'est pas inscrit !")
     return -1
 }
 
@@ -222,7 +300,7 @@ function suprimer(cin){//6
         }
      }
      console.log("")
-     console.log("Le CIN que vous avez saisi est incorrect ou n’existe pas !")
+     console.log("Le CIN que vous avez saisi est incorrect ou n'existe pas !")
      return -1;
 }
 
