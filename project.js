@@ -128,6 +128,10 @@ function aficherListCandidats(){//3
             console.log("");
             break
         }
+        if(candidats[index].partiPolitique=="Independant"){
+            index++;
+            continue;
+        }
         console.log("===============================")
         console.log("Classement : "+(index+1));
         console.log("CIN : "+candidats[index].cin)
