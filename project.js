@@ -135,7 +135,10 @@ function aficherListCandidats(){//3
         console.log("===============================")
         console.log("Classement : "+(index+1));
         console.log("CIN : "+candidats[index].cin)
+        console.log("parti Politique : "+candidats[index].partiPolitique)
         console.log("nom : "+candidats[index].nom)
+        console.log("Prenom : "+candidats[index].prenom)
+        console.log("Age : "+candidats[index].age)
         console.log("Nombre de votes : "+candidats[index].electeurs.length);
         index++;
     }
