@@ -1,6 +1,14 @@
 var prompt = require('prompt-sync')();
 
-var candidats = [{cin : "AB123456",nom : "Boushaba",prenom : "Soufiane",partiPolitique : "Independant",age: 40,electeurs: []}];
+var candidats = [
+    { cin: "AA111111", nom: "Ali", prenom: "A", partiPolitique: "Parti_A", age: 25, electeurs: ["AA111111",  "CC333333"] },
+    { cin: "BB222222", nom: "Ali", prenom: "B", partiPolitique: "Parti_B", age: 34, electeurs: ["BB222222","DD444444"] },
+    { cin: "CC333333", nom: "Cox", prenom: "C", partiPolitique: "Parti_A", age: 41, electeurs: ["FF666666"] },
+    { cin: "DD444444", nom: "Dan", prenom: "D", partiPolitique: "Independant", age: 50, electeurs: [] },
+    { cin: "EE555555", nom: "Ely", prenom: "E", partiPolitique: "Parti_C", age: 19, electeurs: [] },
+    { cin: "FF666666", nom: "Fox", prenom: "F", partiPolitique: "Independant", age: 62, electeurs: [] },
+    { cin: "GG777777", nom: "Guy", prenom: "G", partiPolitique: "Parti_B", age: 28, electeurs: [] }
+];
 var alpha=["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 var num=[1,2,3,4,5,6,7,8,9,0]
 function ajouterCandidat(){//1
