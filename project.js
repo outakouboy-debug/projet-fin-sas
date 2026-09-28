@@ -55,7 +55,7 @@ function ajouterCandidat(){//1
         candidatToAdd.prenom=prenom;
     }
     else{
-        console.log("preLe nom est vide !");
+        console.log("Le prenom est vide !");
         return ajouterCandidat()
     }
     let parti=prompt("Entrez le parti politique (indépendant ou autre) : ");
@@ -226,32 +226,31 @@ function voter(){//4
 }
 
 function modifierInfo(){//5
-    let cin=prompt("Entrez le CIN du candidat : ")
+    let cin=prompt("Entrez le CIN du candidat : ");
     let isFirstLetterInvalid =true;
     let isSecondLetterInvalid=true;
     let digitExist=true;
     
     if(cin.length==8){
-       for(let j=0;j<alpha.length;j++){
-        if(cin[0]==alpha[j]){
+       for(let i=0;i<alpha.length;i++){
+        if(cin[0]==alpha[i]){
             isFirstLetterInvalid= false;
         }
-        if(cin[1]==alpha[j]){
+        if(cin[1]==alpha[i]){
             isSecondLetterInvalid= false;
         }
-        for(let k=2;k<8;k++){
+       }
+       for(let j=2;j<8;j++){
             digitExist=true;
-            for(let m=0;m<10;m++){
-               if(cin[k]==num[m]){
+            for(let k=0;k<10;k++){
+               if(cin[j]==num[k]){
                 digitExist=false;
                }
             }
             if(digitExist){
                 break;
             }
-            
-        }
-    } 
+       }
     }
     
     if(cin.length!=8||isFirstLetterInvalid||isSecondLetterInvalid||digitExist){
@@ -310,7 +309,7 @@ function modifierInfo(){//5
 }
 
 function suprimer(){//6
-    let cin=prompt("Entrez le CIN du candidat : ")
+    let cin=prompt("Entrez le CIN du candidat : ");
     let isFirstLetterInvalid =true;
     let isSecondLetterInvalid=true;
     let digitExist=true;
@@ -323,7 +322,8 @@ function suprimer(){//6
         if(cin[1]==alpha[i]){
             isSecondLetterInvalid= false;
         }
-        for(let j=2;j<8;j++){
+       }
+       for(let j=2;j<8;j++){
             digitExist=true;
             for(let k=0;k<10;k++){
                if(cin[j]==num[k]){
@@ -333,9 +333,7 @@ function suprimer(){//6
             if(digitExist){
                 break;
             }
-            
-        }
-    } 
+       }
     }
     
     if(cin.length!=8||isFirstLetterInvalid||isSecondLetterInvalid||digitExist){
